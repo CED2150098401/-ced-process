@@ -11,5 +11,18 @@
     "@tsconfig/node18": "^18.2.2",
     "@types/node": "^20.8.8",
     "typescript": "^5.2.2"
-  }
+  },
+  "types": "./dist/Main.d.ts",
+  "dependencies": {
+    "undici-types": "^5.25.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CED2150098401/ced-process.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CED2150098401/ced-process/issues"
+  },
+  "homepage": "https://github.com/CED2150098401/ced-process#readme",
+  "description": ""
 }
