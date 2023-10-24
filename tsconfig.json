@@ -1,0 +1,15 @@
+{
+  "extends": "@tsconfig/node18/tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "baseUrl": "./src",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+
+    "strict": true,
+
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "declaration": true,
+    "outDir": "dist"
+  },
+}

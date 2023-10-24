@@ -1,0 +1,15 @@
+{
+  "name": "@ced/process",
+  "version": "0.1.0",
+  "main": "dist/Main",
+  "author": "Seunghoon Lee",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@tsconfig/node18": "^18.2.2",
+    "@types/node": "^20.8.8",
+    "typescript": "^5.2.2"
+  }
+}
