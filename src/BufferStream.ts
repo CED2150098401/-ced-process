@@ -1,6 +1,9 @@
 export class BufferStream extends Array<Buffer> {
+  public toConcatenated() {
+    return Buffer.concat(this);
+  }
   public toString(): string {
-    return Buffer.concat(this).toString();
+    return this.toConcatenated().toString();
   }
   public [Symbol.toStringTag](): string {
     return this.toString();
