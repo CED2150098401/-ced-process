@@ -1,6 +1,6 @@
 {
   "name": "@ced2023/process",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/Main",
   "author": "Seunghoon Lee",
   "license": "MIT",
@@ -10,7 +10,7 @@
   "devDependencies": {
     "@tsconfig/node18": "^18.2.2",
     "@types/node": "^20.8.8",
-    "typescript": "^5.2.2"
+    "typescript": "^5.3.2"
   },
   "types": "./dist/Main.d.ts",
   "dependencies": {

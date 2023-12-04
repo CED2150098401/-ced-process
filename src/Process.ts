@@ -1,33 +1,29 @@
 import { ChildProcess, spawn } from "child_process";
 import { Readable } from "stream";
 
+import { BufferStream } from "./BufferStream";
+
 export abstract class Process<SpawnArguments extends readonly unknown[]> {
   protected abstract readonly command: string;
   protected _process?: ChildProcess;
-  protected readonly _stdout: Buffer[] = [];
-  protected readonly _stderr: Buffer[] = [];
+  public readonly stdout = new BufferStream();
+  public readonly stderr = new BufferStream();
 
   private set process(process: ChildProcess | undefined) {
     if (this._process !== undefined) {
       this._process.stdout?.unpipe();
       this._process.stderr?.unpipe();
       if (!this._process.killed) this.kill(0);
-      this._stdout.length = 0;
-      this._stderr.length = 0;
+      this.stdout.empty();
+      this.stderr.empty();
     }
     if (process !== undefined) {
       this._process = process;
       if (this._process.stdout !== null)
-        this._process.stdout.on("data", (chunk) => this._stdout.push(chunk));
+        this._process.stdout.on("data", (chunk) => this.stdout.push(chunk));
       if (this._process.stderr !== null)
-        this._process.stderr.on("data", (chunk) => this._stderr.push(chunk));
+        this._process.stderr.on("data", (chunk) => this.stderr.push(chunk));
     }
-  }
-  public get stdout() {
-    return Buffer.concat(this._stdout);
-  }
-  public get stderr() {
-    return Buffer.concat(this._stderr);
   }
 
   public get isAlive() {
@@ -63,7 +59,7 @@ export abstract class Process<SpawnArguments extends readonly unknown[]> {
     return new Promise((resolve, reject) => {
       if (this._process === undefined) return resolve();
       this._process.on("exit", () => {
-        if (this._stderr.length === 0) resolve();
+        if (this.stderr.isEmpty) resolve();
         else reject(new Error(this.stderr.toString()));
       });
     });
