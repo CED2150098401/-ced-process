@@ -1,6 +1,6 @@
 {
   "name": "@ced2023/process",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "dist/Main",
   "author": "Seunghoon Lee",
   "license": "MIT",
