@@ -27,7 +27,11 @@ export abstract class Process<SpawnArguments extends readonly unknown[]> {
   }
 
   public get isAlive() {
-    return this._process !== undefined && !this._process.killed;
+    return (
+      this._process !== undefined &&
+      !this._process.killed &&
+      this._process.connected
+    );
   }
 
   /**
@@ -46,10 +50,10 @@ export abstract class Process<SpawnArguments extends readonly unknown[]> {
    * 이 프로세스의 stdin에 Buffer 또는 Readable Stream을 쓴다.
    * @param data Buffer 또는 Readable Stream.
    */
-  public write(data: Buffer | Readable): void {
+  public write(data: Buffer | Readable, options?: { end?: boolean }): void {
     if (this._process === undefined || this._process.stdin === null) return;
     if (data instanceof Buffer) data = Readable.from(data);
-    data.pipe(this._process.stdin);
+    data.pipe(this._process.stdin, options);
   }
   /**
    * 이 프로세스가 종료되면 fulfill되는 Promise를 반환한다.
